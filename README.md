@@ -22,11 +22,16 @@ Clone the project and run `yarn install`
 
 `yarn hardhat deploy`
 
-### Run local blockchain using hardhat
+#### Run local blockchain using hardhat
 
 `yarn hardhat node`
 
-### deploy using a network like sepolia
+#### deploy using a network like sepolia
 
 `yarn hardhat deploy --network sepolia`
+
+### test coverage
+
+To check the code coverage of the tests, execute the following line:
+`yarn hardhat coverage`
 
