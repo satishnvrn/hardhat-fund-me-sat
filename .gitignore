@@ -5,20 +5,17 @@
 !.yarn/sdks
 !.yarn/versions
 
-# Swap the comments on the following lines if you don't wish to use zero-installs
-# Documentation here: https://yarnpkg.com/features/zero-installs
-# !.yarn/cache
-#.pnp.*
-node_modules
-
 node_modules
 .env
 coverage
 coverage.json
 typechain
 typechain-types
+deployments
 
 # Hardhat files
 cache
 artifacts
+
+.yarnrc.yml
 
