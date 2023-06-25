@@ -6,6 +6,11 @@ import "./PriceConverter.sol";
 
 error NotOwner();
 
+/** @title A contract for crowd funding
+*   @author Satish NVRN
+*   @notice This contract is to demo a sample funding contract
+*   @dev This implements price feeds as our library
+*/
 contract FundMe {
     using PriceConverter for uint256;
 
