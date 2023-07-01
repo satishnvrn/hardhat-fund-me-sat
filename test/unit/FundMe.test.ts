@@ -14,24 +14,18 @@ describe('FundMe', async () => {
     }
 
     console.log('deploying all contracts');
-    await deployments.fixture(['all']);
+    const deploymentResults = await deployments.fixture(['all']);
 
-    deployer = (await getNamedAccounts())?.deployer;
-    console.log('deployer', deployer);
-    console.log('chainId', network.config.chainId);
-    fundMe = await ethers.getContractAt("FundMe", deployer) as unknown as FundMe;
-    console.log('fundMe', fundMe);
-    // mockV3Aggregator = await ethers.getContractAt("MockV3Aggregator", deployer) as unknown as MockV3Aggregator;
-    // console.log('mockV3Aggregator', mockV3Aggregator);
+    const fundMeAddress: string = deploymentResults["FundMe"]?.address;
+    fundMe = await ethers.getContractAt("FundMe", fundMeAddress) as unknown as FundMe;
+    const mockV3AggregatorAddress: string = deploymentResults["MockV3Aggregator"]?.address;
+    mockV3Aggregator = await ethers.getContractAt("MockV3Aggregator", mockV3AggregatorAddress) as unknown as MockV3Aggregator;
   });
 
   describe("Constructor",async () => {
-    // beforeEach();
     it("sets the aggregator addresses correctly",async () => {
-      // const response = await fundMe.priceFeed();
-      const response = '';
-      // const mockV3AggregatorAddress = await mockV3Aggregator.getAddress();
-      const mockV3AggregatorAddress = '';
+      const response: string = await fundMe.getPriceFeed();
+      const mockV3AggregatorAddress: string = await mockV3Aggregator.getAddress();
       assert.equal(response, mockV3AggregatorAddress);
     });
   });
