@@ -35,3 +35,9 @@ Clone the project and run `yarn install`
 To check the code coverage of the tests, execute the following line:
 `yarn hardhat coverage`
 
+### run unit test cases
+
+`yarn hardhat test`
+
+`yarn hardhat test --grep '<the test suite description>'`
+

@@ -14,10 +14,10 @@ error NotOwner();
 contract FundMe {
     using PriceConverter for uint256;
 
-    uint256 public constant MINIMUM_USD = 50 * 1e18;
+    uint256 public constant MINIMUM_USD = 50;
 
-    address[] public funders;
-    mapping(address => uint256) public addressToAmountFunded;
+    address[] private funders;
+    mapping(address => uint256) private addressToAmountFunded;
 
     address private immutable i_owner;
 
@@ -66,5 +66,13 @@ contract FundMe {
 
     function getPriceFeed() public view returns (AggregatorV3Interface) {
         return priceFeed;
+    }
+
+    function getFunders(uint256 index) public view returns (address) {
+        return funders[index];
+    }
+
+    function getAddressToAmountFunded(address funderAddress) public view returns (uint256) {
+        return addressToAmountFunded[funderAddress];
     }
 }
