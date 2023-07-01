@@ -2,7 +2,6 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 
 import "hardhat-deploy";
-import "hardhat-deploy-ethers";
 import 'dotenv/config';
 
 const SEPOLIA_RPC_URL: string = process.env.SEPOLIA_RPC_URL || '';
