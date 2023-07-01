@@ -19,3 +19,5 @@ artifacts
 
 .yarnrc.yml
 
+gas-report.txt
+
