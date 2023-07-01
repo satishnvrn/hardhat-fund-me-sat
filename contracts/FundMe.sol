@@ -3,6 +3,7 @@ pragma solidity ^0.8.18;
 
 import '@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol';
 import './PriceConverter.sol';
+import "hardhat/console.sol";
 
 error NotOwner();
 
@@ -41,6 +42,7 @@ contract FundMe {
       msg.value.getConversionRate(priceFeed) >= MINIMUM_USD,
       "Didn't send enough ETH"
     );
+    console.log('Funding ', msg.value);
     funders.push(msg.sender);
     addressToAmountFunded[msg.sender] += msg.value;
     // 20000000000000000

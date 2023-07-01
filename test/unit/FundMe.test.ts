@@ -1,12 +1,11 @@
 import { deployments, ethers, getNamedAccounts, network } from 'hardhat';
 import { FundMe, MockV3Aggregator } from '../../typechain-types';
-import { Address } from 'hardhat-deploy/dist/types';
 import { assert, expect } from 'chai';
 import { developmentChains } from '../../helper-hardhat-config';
 
 describe('FundMe', async () => {
   let fundMe: FundMe;
-  let deployer: Address;
+  let deployer: string;
   let mockV3Aggregator: MockV3Aggregator;
   const sendValue = ethers.parseEther('0.03');
   beforeEach(async () => {
