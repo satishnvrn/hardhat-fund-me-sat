@@ -36,7 +36,8 @@ const config: HardhatUserConfig = {
     outputFile: "gas-report.txt",
     noColors: true,
     currency: "USD",
-    coinmarketcap: COINMARKET_API_KEY,
+    // coinmarketcap: COINMARKET_API_KEY,
+    token: "ETH",
   },
   etherscan: {
     apiKey: {

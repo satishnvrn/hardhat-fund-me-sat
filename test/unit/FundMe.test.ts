@@ -18,16 +18,16 @@ describe('FundMe', async () => {
     const deploymentResults = await deployments.fixture(['all']);
 
     const fundMeAddress: string = deploymentResults['FundMe']?.address;
-    fundMe = (await ethers.getContractAt(
+    fundMe = await ethers.getContractAt(
       'FundMe',
       fundMeAddress
-    )) as unknown as FundMe;
+    );
     const mockV3AggregatorAddress: string =
       deploymentResults['MockV3Aggregator']?.address;
-    mockV3Aggregator = (await ethers.getContractAt(
+    mockV3Aggregator = await ethers.getContractAt(
       'MockV3Aggregator',
       mockV3AggregatorAddress
-    )) as unknown as MockV3Aggregator;
+    );
   });
 
   describe('Constructor', async () => {
@@ -69,6 +69,34 @@ describe('FundMe', async () => {
         (await provider?.getBalance(deployer)) || BigInt(0);
 
       const transactionResponse = await fundMe.withdraw();
+      const transactionReceipt = (await transactionResponse.wait()) || {
+        gasUsed: BigInt(0),
+        gasPrice: BigInt(0),
+      };
+      const { gasUsed, gasPrice } = transactionReceipt;
+      const gasCost = gasUsed * gasPrice;
+
+      const endingFundMeBalance =
+        (await provider?.getBalance(fundMeAddress)) || BigInt(0);
+      const endingDeployerBalance =
+        (await provider?.getBalance(deployer)) || BigInt(0);
+      assert.equal(endingFundMeBalance, BigInt(0));
+      assert.equal(
+        (startingFundMeBalance + startingDeployerBalance).toString(),
+        (endingDeployerBalance + gasCost).toString()
+      );
+    });
+
+    it('cheaper withdraw by deployer', async () => {
+      const fundMeAddress = await fundMe.getAddress();
+      const provider = fundMe.runner?.provider;
+
+      const startingFundMeBalance =
+        (await provider?.getBalance(fundMeAddress)) || BigInt(0);
+      const startingDeployerBalance =
+        (await provider?.getBalance(deployer)) || BigInt(0);
+
+      const transactionResponse = await fundMe.cheaperWithdraw();
       const transactionReceipt = (await transactionResponse.wait()) || {
         gasUsed: BigInt(0),
         gasPrice: BigInt(0),

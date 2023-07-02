@@ -41,3 +41,5 @@ To check the code coverage of the tests, execute the following line:
 
 `yarn hardhat test --grep '<the test suite description>'`
 
+12:17:52
+
