@@ -29,5 +29,10 @@
   },
   "dependencies": {
     "dotenv": "^16.3.1"
+  },
+  "scripts": {
+    "deploy:sepolia": "yarn hardhat deploy --network sepolia",
+    "fund:sepolia": "yarn hardhat run scripts/fund.ts --network sepolia",
+    "withdraw:sepolia": "yarn hardhat run scripts/withdraw.ts --network sepolia"
   }
 }
