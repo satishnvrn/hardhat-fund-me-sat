@@ -29,7 +29,7 @@ const config: HardhatUserConfig = {
     deployer: {
       default: 0,
       1: 0,
-    }
+    },
   },
   gasReporter: {
     enabled: true,
